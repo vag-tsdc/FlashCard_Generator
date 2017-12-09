@@ -23,6 +23,35 @@ var answerRight = 0;
 var answerWrong = 0;
 
 // askQuestion prompts the user to answer a given cloze-deleted question
+function askQuestion() {
+    inquirer.prompt([
+        {
+            type: 'input',
+			message: closeQuestions[currentQuestion].partial + '\nAnswer: ',
+			name: 'userGuess'
+        }
+    ]).then(function (answers) {
+        console.log("\n");
+
+        // Check if user answered question correctly
+        if (answers.userGuess.toLowerCase() === clozeQuestions[currentQuestion].clize.toLowerCase()) {
+            console.log("CORRECT!");
+            answerRight++;
+        } else {
+            console.log("INCORRECT!");
+            answerWrong++;
+        }
+
+        // show the correct answer
+        console.log(closeQuestions[currentQuestion].full);
+        console.log("-----------------------------------------\n");
+
+        // on to the next question
+
+
+    })
+}
+
 
 // Begin asking the questions!
 // askQuestion();
