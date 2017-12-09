@@ -11,8 +11,8 @@ var closeQuestions = [];
 
 // Populate the cloze-deleted questions list
 for (var i = 0; i < questions.length; i++) {
-	var q = new flashCards.ClozeCard(questions[i].full, questions[i].cloze);
-	closeQuestions.push(q);
+    var q = new flashCards.ClozeCard(questions[i].full, questions[i].cloze);
+    closeQuestions.push(q);
 }
 
 // What question the user is currently on
@@ -23,6 +23,62 @@ var answerRight = 0;
 var answerWrong = 0;
 
 // askQuestion prompts the user to answer a given cloze-deleted question
+function askQuestion() {
+    inquirer.prompt([{
+        type: 'input',
+        message: closeQuestions[currentQuestion].partial + '\nAnswer: ',
+        name: 'userGuess'
+    }]).then(function (answers) {
+        console.log("\n");
+
+        // Check if user answered question correctly
+        if (answers.userGuess.toLowerCase() === closeQuestions[currentQuestion].cloze.toLowerCase()) {
+            console.log("CORRECT!");
+            answerRight++;
+        } else {
+            console.log("INCORRECT!");
+            answerWrong++;
+        }
+
+        // show the correct answer
+        console.log(closeQuestions[currentQuestion].full);
+        console.log("-----------------------------------------\n");
+
+        // on to the next question
+        if (currentQuestion < closeQuestions.length - 1) {
+            currentQuestion++;
+            askQuestion();
+        } else {
+            console.log('Game Over!');
+            console.log('Correct Answers: ' + answerRight);
+            console.log('Incorrect Answers: ' + answerWrong);
+
+            console.log('-------------------------------------\n');
+
+            // Prompt the user to play again
+            inquirer.prompt([{
+                type: 'confirm',
+                message: 'Would you like to play again?',
+                name: 'playAgain'
+            }]).then(function (answers) {
+                if (answers.playAgain) {
+                    // Reset the game
+                    currentQuestion = 0;
+                    answerRight = 0;
+                    answerWrong = 0;
+
+                    // Begin asking the questions!
+                    askQuestion();
+                } else {
+                    // Exit the game
+                    console.log("THANKS FOR PLAYING!!!!");
+                }
+            })
+        }
+
+    })
+
+}
 
 // Begin asking the questions!
-// askQuestion();
+askQuestion();

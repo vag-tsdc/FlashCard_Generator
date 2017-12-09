@@ -7,7 +7,7 @@ exports.BasicCard = function (front, back) {
 
 // ClozeCard constructor takes two arguments: text and cloze.
 // These values represent the full text and the cloze-deleted portion of the flashcard text.
-exposts.ClozeCard = function (text, cloze) {
+exports.ClozeCard = function (text, cloze) {
     // Convert the incoming strings to lower case
     var textToLower = text.toLowerCase();
     var clozeToLower = cloze.toLowerCase();

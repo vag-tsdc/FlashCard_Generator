@@ -1,0 +1,22 @@
+{
+  "name": "flashcard_generator",
+  "version": "1.0.0",
+  "description": "Flashcard Generator",
+  "main": "flashCardApp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vag-tsdc/FlashCard_Generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vag-tsdc/FlashCard_Generator/issues"
+  },
+  "homepage": "https://github.com/vag-tsdc/FlashCard_Generator#readme",
+  "dependencies": {
+    "inquirer": "^4.0.1"
+  }
+}
